@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class SC_SpaceshipController : MonoBehaviour
 {
-    public float normalSpeed = 25f;
-    public float accelerationSpeed = 45f;
+    public float normalSpeed = 50f;
+    public float accelerationSpeed = 100f;
     public Transform cameraPosition;
     public Camera mainCamera;
     public Transform spaceshipRoot;
-    public float rotationSpeed = 50.0f;
+    public float rotationSpeed = 30.0f;
     public float cameraSmooth = 4f;
     public RectTransform crosshairTexture;
 
