@@ -37,11 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Asteroids Pack\Assets\Scripts\RandomRotator.cs" />
-     <Compile Include="Assets\ChainMovement.cs" />
-     <Compile Include="Assets\GameOver.cs" />
-     <Compile Include="Assets\InvertNormals.cs" />
-     <Compile Include="Assets\SC_SpaceshipController.cs" />
-     <Compile Include="Assets\SnakeLikeMovement.cs" />
+     <Compile Include="Assets\Scripts\InvertNormals.cs" />
+     <Compile Include="Assets\Scripts\SC_SpaceshipController.cs" />
+     <Compile Include="Assets\Scripts\SnakeLikeMovement.cs" />
+     <Compile Include="Assets\Scripts\SpawnAsteroids.cs" />
      <Compile Include="Assets\StarSparrow\Readme\Readme Files\Scripts\ReadmeStarSparrow.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/rnkhlgnome/Unity/Hub/Editor/2019.4.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

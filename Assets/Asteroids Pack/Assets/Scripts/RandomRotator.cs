@@ -4,7 +4,7 @@ using System.Collections;
 public class RandomRotator : MonoBehaviour
 {
     [SerializeField]
-    private float tumble;
+    public float tumble = 0.3f;
 
     void Start()
     {
