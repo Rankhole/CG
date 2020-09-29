@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 159773553}
   m_Layer: 0
   m_Name: InsideOutSphere
-  m_TagString: Untagged
+  m_TagString: Collected
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,10 +437,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159773546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &175269926
@@ -969,7 +969,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 655766229}
   timeText: {fileID: 949574503}
-  score: 0
 --- !u!1 &886532523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,9 +1015,10 @@ GameObject:
   - component: {fileID: 929673264}
   - component: {fileID: 929673268}
   - component: {fileID: 929673269}
+  - component: {fileID: 929673270}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Collected
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1128,6 +1128,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &929673270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929673263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a8b4fc6e44ba42a6f1f3f96e9cb73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereSize: 1000
+  sphere: {fileID: 929673263}
 --- !u!1 &932504071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,15 +1781,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c51a19f7aa578bae9fa8198dbea6c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 1320072306}
-  minDistance: 5
+  asteroidTail: []
   beginSize: 1
   speed: 1
-  bodyprefabs: {fileID: 286075739}
+  asteroidPrefab: {fileID: 286075739}
   maxTrailSize: 1000
   speedOfInterp: 0
+  spaceship: {fileID: 1320072306}
   scoreText: {fileID: 655766229}
+  timeText: {fileID: 949574503}
 --- !u!1 &1885915993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 130102, guid: 04d0bf4be9447154188d86f6e3b8dce9,

@@ -41,6 +41,7 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\SC_SpaceshipController.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\ShrinkingSphere.cs" />
      <Compile Include="Assets\Scripts\SnakeLikeMovement.cs" />
      <Compile Include="Assets\Scripts\SpawnAsteroids.cs" />
      <Compile Include="Assets\StarSparrow\Readme\Readme Files\Scripts\ReadmeStarSparrow.cs" />

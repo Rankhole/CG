@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+// Eigenanteil
 public class SnakeLikeMovement : MonoBehaviour
 {
 
-    public List<Transform> bodyParts = new List<Transform>();
-
-    public float minDistance = 50f;
+    public List<Transform> asteroidTail = new List<Transform>();
 
     public int beginSize = 1;
     
@@ -15,14 +15,11 @@ public class SnakeLikeMovement : MonoBehaviour
     // public float rotationSpeed = 100;
 
     [SerializeField]
-    public GameObject bodyprefabs;
-
-    private float dis;
-    private Transform curBodyPart;
-    private Transform PrevBodyPart;
-
+    public GameObject asteroidPrefab;
     public int maxTrailSize = 200;
     public float speedOfInterp = 1f;
+
+    public Transform spaceship;
 
     private Vector3[] trailpath;
     private Quaternion[] trailrotation;
@@ -30,6 +27,7 @@ public class SnakeLikeMovement : MonoBehaviour
     private Vector3[] velocities;
 
     public GameObject scoreText;
+    public GameObject timeText;
     private Score scoreScript;
 
     // Start is called before the first frame update
@@ -44,8 +42,11 @@ public class SnakeLikeMovement : MonoBehaviour
         velocities = new Vector3[maxTrailSize];
 
         // head of our "tail" is the spaceship
-        trailpath[0] = bodyParts[0].position;
-        trailrotation[0] = bodyParts[0].rotation;
+        asteroidTail.Add(spaceship);
+
+        // add first position of our trailpath and rotation
+        trailpath[0] = asteroidTail[0].position;
+        trailrotation[0] = asteroidTail[0].rotation;
 
         // call method to record spaceship transformation every 1 second
         InvokeRepeating("UpdateSpaceshipPath", 1f, 1f);  //1s delay, repeat every 1s
@@ -66,8 +67,8 @@ public class SnakeLikeMovement : MonoBehaviour
             trailpath[i] = trailpath[i-1];
             trailrotation[i] = trailrotation[i-1];
         }
-        trailpath[0] = bodyParts[0].position;
-        trailrotation[0] = bodyParts[0].rotation;
+        trailpath[0] = asteroidTail[0].position;
+        trailrotation[0] = asteroidTail[0].rotation;
     }
 
     // Update is called once per frame
@@ -75,6 +76,9 @@ public class SnakeLikeMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q))
             AddBodyPart();
+        
+        Score.time = Time.timeSinceLevelLoad;
+        timeText.GetComponent<TMPro.TextMeshProUGUI>().SetText(Score.time.ToString("F2"));
     }
 
     void FixedUpdate()
@@ -84,46 +88,39 @@ public class SnakeLikeMovement : MonoBehaviour
 
     public void Move()
     {
-
-        float curspeed = speed;
         float time_between_secs = Time.time - Mathf.Floor(Time.time);
         // Debug.Log(time_between_secs);
-        for (int i = 1; i < bodyParts.Count; i++)
-        {
 
-            curBodyPart = bodyParts[i];
-            PrevBodyPart = bodyParts[i-1];
+        // iterate over all the asteroids and update their positions
+        for (int i = 1; i < asteroidTail.Count; i++)
+        {
+            Transform currentAsteroid = asteroidTail[i];
+            // New position of our asteroid x will be the position of our spaceship x seconds ago -> position x in trail arrays
             Vector3 newpos = trailpath[i];
             Quaternion newrot = trailrotation[i];
-
-            // dis = Vector3.Distance(newpos, curBodyPart.position);
-
-            // float T = Time.deltaTime * dis / minDistance * curspeed;
-
-            // if (T > 0.5f)
-            //     T = 0.5f;
-            curBodyPart.position = Vector3.SmoothDamp(curBodyPart.position, newpos, ref velocities[i], speedOfInterp);
-            curBodyPart.rotation = Quaternion.Slerp(curBodyPart.rotation, newrot, time_between_secs);
-
-
-
+            // set the position
+            currentAsteroid.position = Vector3.SmoothDamp(currentAsteroid.position, newpos, ref velocities[i], speedOfInterp);
+            currentAsteroid.rotation = Quaternion.Slerp(currentAsteroid.rotation, newrot, time_between_secs);
         }
     }
 
 
     public void AddBodyPart()
     {
-        if(bodyParts.Count == maxTrailSize){
+        if(asteroidTail.Count == maxTrailSize){
             Debug.Log("Maximum number of asteroids reached!");
             return;
         }
-        GameObject createdAsteroid = Instantiate (bodyprefabs, trailpath[bodyParts.Count - 1], trailrotation[bodyParts.Count - 1]) as GameObject;
+        // instantiate an asteroid object
+        GameObject createdAsteroid = Instantiate (asteroidPrefab, trailpath[asteroidTail.Count - 1], trailrotation[asteroidTail.Count - 1]) as GameObject;
+        // set it's tag to "Collected", so that it will lead to game over if ship collides with it
         createdAsteroid.tag = "Collected";
+        // enable collider (mesh)
         createdAsteroid.GetComponent<Collider>().enabled = true;
         Transform newpart = createdAsteroid.transform;
         newpart.SetParent(transform);
-
-        bodyParts.Add(newpart);
+        // finally, add the new asteroid to our asteroidTail list
+        asteroidTail.Add(newpart);
 
         // increase score when collecting asteroid
         scoreScript.increaseScore();
@@ -140,9 +137,21 @@ public class SnakeLikeMovement : MonoBehaviour
         } else if (other.tag == "Collected"){ // Colliding with our own snake body = Game Over!
             Debug.Log("GAME OVER!");
             // Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         } else {
             Debug.Log("Object not tagged properly!");
         }
+    }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("GAME OVER!");
+            // Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
     }
 
 }
