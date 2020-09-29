@@ -9,7 +9,7 @@ public class SnakeLikeMovement : MonoBehaviour
 
     public float minDistance = 50f;
 
-    public int beginSize;
+    public int beginSize = 1;
     
     public float speed = 1000;
     // public float rotationSpeed = 100;
@@ -29,15 +29,28 @@ public class SnakeLikeMovement : MonoBehaviour
 
     private Vector3[] velocities;
 
+    public GameObject scoreText;
+    private Score scoreScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        // get Score script from text object
+        scoreScript = scoreText.GetComponent<Score>();
+
+        // initialize arrays for tracking spaceship movement over time
         trailpath = new Vector3[maxTrailSize];
         trailrotation = new Quaternion[maxTrailSize];
         velocities = new Vector3[maxTrailSize];
+
+        // head of our "tail" is the spaceship
         trailpath[0] = bodyParts[0].position;
         trailrotation[0] = bodyParts[0].rotation;
+
+        // call method to record spaceship transformation every 1 second
         InvokeRepeating("UpdateSpaceshipPath", 1f, 1f);  //1s delay, repeat every 1s
+
+        // optionally add beginSize many Asteroids to tail
         for (int i = 0; i < beginSize - 1; i++)
         {
             AddBodyPart();
@@ -111,20 +124,24 @@ public class SnakeLikeMovement : MonoBehaviour
         newpart.SetParent(transform);
 
         bodyParts.Add(newpart);
+
+        // increase score when collecting asteroid
+        scoreScript.increaseScore();
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        //If tag is "Collectable", it means we collect the asteroid, destroy it, add it to our "snake body" and increase our score
         if (other.tag == "Collectable")
         {
             Debug.Log("COLLECTED");
             Destroy(other.gameObject);
             AddBodyPart();
-        } else if (other.tag == "Collected"){
+        } else if (other.tag == "Collected"){ // Colliding with our own snake body = Game Over!
             Debug.Log("GAME OVER!");
             // Destroy(gameObject);
         } else {
-            Debug.Log("NOPE");
+            Debug.Log("Object not tagged properly!");
         }
     }
 
