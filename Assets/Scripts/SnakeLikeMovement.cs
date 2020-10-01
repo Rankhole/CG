@@ -34,6 +34,8 @@ public class SnakeLikeMovement : MonoBehaviour
     {
         // get Score script from text object
         scoreScript = scoreText.GetComponent<Score>();
+        Score.score = 0;
+        Score.time = 0f;
 
         spawnAsteroidsScript = this.GetComponent<SpawnAsteroids>();
 
