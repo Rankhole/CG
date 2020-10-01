@@ -31,6 +31,7 @@ public class SpawnAsteroids : MonoBehaviour
     public void SpawnAsteroid()
     {
         var spawnedAsteroid = Instantiate(asteroidPrefab) as GameObject;
+        spawnedAsteroid.layer = 2;
         spawnedAsteroid.tag = "Collectable";
         spawnedAsteroid.GetComponent<Collider>().enabled = true;
         var vec = new Vector3();
