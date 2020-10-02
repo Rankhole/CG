@@ -1,0 +1,18 @@
+Folgende Assets wurden verwendet:
+Quick Outline (Script)
+https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488
+
+Asteroids Pack (Für das Asteroiden Prefab + Skybox)
+https://assetstore.unity.com/packages/3d/environments/asteroids-pack-84988
+
+Star Sparrow Modular Spaceship (Ebenfalls nur das Model/Prefab)
+https://assetstore.unity.com/packages/3d/vehicles/space/star-sparrow-modular-spaceship-73167
+
+Weiterhin Lizenzfreie Musik:
+DJ Ten - MagnetoSphere
+Arcis - Explorer
+
+Verwendete Hilfen/Tutorial:
+https://wiki.unity3d.com/index.php/ReverseNormals
+https://sharpcoderblog.com/blog/spaceship-controller-in-unity-3d
+https://docs.unity3d.com/ScriptReference/

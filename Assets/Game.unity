@@ -28794,9 +28794,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1490531671}
   - component: {fileID: 1490531670}
-  - component: {fileID: 1490531669}
   - component: {fileID: 1490531673}
   - component: {fileID: 1490531672}
+  - component: {fileID: 1490531669}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -28813,17 +28813,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1490531668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792c34384eaedb1c3995cbf7aa009d6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 50043ea9291f8e846a803b32be3eae08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 25
-  accelerationSpeed: 45
-  cameraPosition: {fileID: 886532524}
-  mainCamera: {fileID: 1089223749}
-  spaceshipRoot: {fileID: 1320072306}
+  cruiseSpeed: 25
+  accelerationSpeed: 60
+  spaceship: {fileID: 1320072306}
   rotationSpeed: 2
   cameraSmooth: 50
-  crosshairTexture: {fileID: 0}
 --- !u!54 &1490531670
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28888,7 +28885,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidTail: []
   beginSize: 1
-  speed: 1
   asteroidPrefab: {fileID: 286075739}
   maxTrailSize: 1000
   speedOfInterp: 1

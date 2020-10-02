@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+
+// Quelle: https://wiki.unity3d.com/index.php/ReverseNormals
+// to invert normals of the sphere (inside texture)
 public class InvertNormals : MonoBehaviour
 {
     void Start()

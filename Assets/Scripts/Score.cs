@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Eigenanteil
+// Speichert den score und die benötigte Zeit (static), damit es im GameOver Screen genutzt werden kann
 public class Score : MonoBehaviour
 {
 
@@ -19,6 +20,7 @@ public class Score : MonoBehaviour
         scoreText.GetComponent<TMPro.TextMeshProUGUI>().SetText(score.ToString());
         timeText.GetComponent<TMPro.TextMeshProUGUI>().SetText(Score.time.ToString("F2"));
     }
+
     public void increaseScore()
     {
         score++;
